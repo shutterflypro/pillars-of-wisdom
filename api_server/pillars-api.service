@@ -1,0 +1,19 @@
+[Unit]
+Description=Pillars of Wisdom Contact API (Python)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/shutterflypro/pillars-of-wisdom/api_server
+ExecStart=/usr/bin/python3.11 contact_api.py
+Restart=always
+RestartSec=5
+Environment=API_PORT=3001
+Environment=SMTP_HOST=smtp.gmail.com
+Environment=SMTP_PORT=587
+Environment=SMTP_USER=YOU@gmail.com
+Environment=SMTP_PASS=YOUR_APP_PASSWORD
+Environment=CONTACT_EMAIL=hello@pillarsofwisdom.ai
+
+[Install]
+WantedBy=multi-user.target

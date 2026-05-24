@@ -26,6 +26,4 @@ dist-ssr
 # Deployment artifacts
 *.tar.gz
 deploy/
-server/
-api_server/
-.env
+__pycache__/
