@@ -993,35 +993,5 @@ When model drift is detected, the platform initiates an automated retraining pro
       capabilityRef: 'fraud-detection',
       industryRef: 'financial-services',
     },
-  },
-
-  // ═══════════════════════════════════════════════════════
-  // REMAINING CAPABILITIES — Template-based feature generation
-  // For brevity, remaining capabilities follow the same pattern
-  // ═══════════════════════════════════════════════════════
-}
-
-// Helper function to get a feature
-export function getFeature(capabilitySlug, featureSlug) {
-  const cap = platformFeatures[capabilitySlug]
-  if (!cap) return null
-  return cap[featureSlug] || null
-}
-
-// Get all features for a capability
-export function getCapabilityFeatures(capabilitySlug) {
-  const cap = platformFeatures[capabilitySlug]
-  if (!cap) return []
-  return Object.entries(cap).map(([slug, data]) => ({ slug, ...data }))
-}
-
-// Get all features across all capabilities
-export function getAllFeatures() {
-  const all = []
-  for (const [capSlug, features] of Object.entries(platformFeatures)) {
-    for (const [featSlug, data] of Object.entries(features)) {
-      all.push({ capabilitySlug, featureSlug: featSlug, ...data })
-    }
   }
-  return all
 }
