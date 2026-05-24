@@ -351,20 +351,30 @@ export default function PlatformFeaturePage() {
             TECHNICAL SPECIFICATIONS
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {feature.technicalSpecs.map((spec, i) => (
-              <motion.div
-                key={spec}
-                initial={{ opacity: 0, y: 20 }}
-                animate={specsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white/5 rounded-xl p-6 border border-white/10 hover:border-gold/20 transition-colors duration-300"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0" />
-                  <p className="text-[0.88rem] text-white/80 leading-relaxed">{spec}</p>
-                </div>
-              </motion.div>
-            ))}
+            {feature.technicalSpecs.map((spec, i) => {
+              const currentPath = `/platform-features/${capabilitySlug}/${featureSlug}`
+              return (
+                <motion.div
+                  key={spec}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={specsInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Link
+                    to={`/technical-specs/${capabilitySlug}/${featureSlug}/${i}?from=${encodeURIComponent(currentPath)}`}
+                    className="group block bg-white/5 rounded-xl p-6 border border-white/10 hover:border-gold/20 hover:bg-white/8 transition-all duration-300"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-gold mt-2 flex-shrink-0 group-hover:scale-150 transition-transform duration-300" />
+                      <p className="text-[0.88rem] text-white/80 leading-relaxed group-hover:text-white transition-colors duration-200">{spec}</p>
+                    </div>
+                    <div className="mt-3 flex items-center gap-1 text-gold text-[0.65rem] font-bold tracking-[0.1em] uppercase opacity-0 group-hover:opacity-100 group-hover:gap-2 transition-all duration-200">
+                      VIEW DETAIL <ChevronRight className="w-3 h-3" />
+                    </div>
+                  </Link>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>

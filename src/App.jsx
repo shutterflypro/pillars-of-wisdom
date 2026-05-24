@@ -81,6 +81,7 @@ import ComplianceMonitoringPage from './pages/ComplianceMonitoringPage.jsx'
 import AuditReportingPage from './pages/AuditReportingPage.jsx'
 import IndustryCapabilityPage from './pages/IndustryCapabilityPage.jsx'
 import PlatformFeaturePage from './pages/PlatformFeaturePage.jsx'
+import TechnicalSpecPage from './pages/TechnicalSpecPage.jsx'
 import AISupportWidget from './components/AISupportWidget.jsx'
 
 export default function App() {
@@ -185,6 +186,7 @@ export default function App() {
                   <Route path="/industries/:slug" element={<IndustryPage />} />
                   <Route path="/industries/:industrySlug/:capabilitySlug" element={<IndustryCapabilityPage />} />
                   <Route path="/platform-features/:capabilitySlug/:featureSlug" element={<PlatformFeaturePage />} />
+                  <Route path="/technical-specs/:capabilitySlug/:featureSlug/:specIndex" element={<TechnicalSpecPage />} />
                   <Route path="/ai" element={<AIPage />} />
                   <Route path="/enterprise" element={<EnterprisePage />} />
                   <Route path="/pricing" element={<PricingPage />} />
