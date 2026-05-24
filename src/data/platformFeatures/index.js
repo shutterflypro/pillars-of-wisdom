@@ -37,7 +37,7 @@ export function getAllFeatures() {
   const all = []
   for (const [capSlug, features] of Object.entries(platformFeatures)) {
     for (const [featSlug, data] of Object.entries(features)) {
-      all.push({ capabilitySlug, featureSlug: featSlug, ...data })
+      all.push({ capabilitySlug: capSlug, featureSlug: featSlug, ...data })
     }
   }
   return all
