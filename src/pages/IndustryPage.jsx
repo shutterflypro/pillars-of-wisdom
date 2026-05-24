@@ -14,6 +14,10 @@ const iconMap = {
   HeartPulse, Umbrella, Home, Calculator, Building2,
 }
 
+function slugify(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
 const industriesData = {
   'financial-services': {
     name: 'Financial Services',
@@ -25,12 +29,12 @@ const industriesData = {
       { value: '60%', label: 'Lower Operational Costs' },
     ],
     features: [
-      { icon: 'Landmark', text: 'Regulatory Reporting', desc: 'Automated reporting across jurisdictions' },
-      { icon: 'ShieldCheck', text: 'Risk Management', desc: 'Real-time risk scoring and monitoring' },
-      { icon: 'FileText', text: 'Document Automation', desc: 'Intelligent document processing and classification' },
-      { icon: 'Users', text: 'Client Onboarding', desc: 'Streamlined KYC and client lifecycle management' },
-      { icon: 'BarChart3', text: 'Portfolio Analytics', desc: 'AI-driven portfolio insights and optimization' },
-      { icon: 'Lock', text: 'Fraud Detection', desc: 'Advanced pattern recognition and anomaly detection' },
+      { icon: 'Landmark', text: 'Regulatory Reporting', desc: 'Automated reporting across jurisdictions', slug: 'regulatory-reporting' },
+      { icon: 'ShieldCheck', text: 'Risk Management', desc: 'Real-time risk scoring and monitoring', slug: 'risk-management' },
+      { icon: 'FileText', text: 'Document Automation', desc: 'Intelligent document processing and classification', slug: 'document-automation' },
+      { icon: 'Users', text: 'Client Onboarding', desc: 'Streamlined KYC and client lifecycle management', slug: 'client-onboarding' },
+      { icon: 'BarChart3', text: 'Portfolio Analytics', desc: 'AI-driven portfolio insights and optimization', slug: 'portfolio-analytics' },
+      { icon: 'Lock', text: 'Fraud Detection', desc: 'Advanced pattern recognition and anomaly detection', slug: 'fraud-detection' },
     ],
     useCases: [
       'Automated loan origination and servicing',
@@ -51,12 +55,12 @@ const industriesData = {
       { value: '24/7', label: 'Regulatory Monitoring' },
     ],
     features: [
-      { icon: 'Scale', text: 'Policy Management', desc: 'Centralized policy creation and enforcement' },
-      { icon: 'ClipboardCheck', text: 'Audit Trails', desc: 'Immutable, timestamped audit records' },
-      { icon: 'FileText', text: 'Contract Automation', desc: 'AI-powered contract review and approval' },
-      { icon: 'Shield', text: 'Risk Assessment', desc: 'Dynamic risk scoring and mitigation tracking' },
-      { icon: 'Users', text: 'Case Management', desc: 'End-to-end legal case workflow automation' },
-      { icon: 'Eye', text: 'Regulatory Monitoring', desc: 'Continuous regulatory change tracking' },
+      { icon: 'Scale', text: 'Policy Management', desc: 'Centralized policy creation and enforcement', slug: 'policy-management' },
+      { icon: 'ClipboardCheck', text: 'Audit Trails', desc: 'Immutable, timestamped audit records', slug: 'audit-trails' },
+      { icon: 'FileText', text: 'Contract Automation', desc: 'AI-powered contract review and approval', slug: 'contract-automation' },
+      { icon: 'Shield', text: 'Risk Assessment', desc: 'Dynamic risk scoring and mitigation tracking', slug: 'risk-assessment' },
+      { icon: 'Users', text: 'Case Management', desc: 'End-to-end legal case workflow automation', slug: 'case-management' },
+      { icon: 'Eye', text: 'Regulatory Monitoring', desc: 'Continuous regulatory change tracking', slug: 'regulatory-monitoring' },
     ],
     useCases: [
       'Automated contract review and approval',
@@ -77,12 +81,12 @@ const industriesData = {
       { value: '65%', label: 'Reduced Admin Burden' },
     ],
     features: [
-      { icon: 'HeartPulse', text: 'Patient Workflow', desc: 'End-to-end patient journey orchestration' },
-      { icon: 'ShieldCheck', text: 'HIPAA Compliance', desc: 'Built-in safeguards for protected health information' },
-      { icon: 'FileText', text: 'Clinical Docs', desc: 'AI-powered clinical document intelligence and coding' },
-      { icon: 'Users', text: 'Provider Onboarding', desc: 'Automated credentialing and enrollment workflows' },
-      { icon: 'BarChart3', text: 'Quality Metrics', desc: 'Real-time clinical quality measure tracking' },
-      { icon: 'Lock', text: 'Data Security', desc: 'Encryption, access controls, and audit logging' },
+      { icon: 'HeartPulse', text: 'Patient Workflow', desc: 'End-to-end patient journey orchestration', slug: 'patient-workflow' },
+      { icon: 'ShieldCheck', text: 'HIPAA Compliance', desc: 'Built-in safeguards for protected health information', slug: 'hipaa-compliance' },
+      { icon: 'FileText', text: 'Clinical Docs', desc: 'AI-powered clinical document intelligence and coding', slug: 'clinical-docs' },
+      { icon: 'Users', text: 'Provider Onboarding', desc: 'Automated credentialing and enrollment workflows', slug: 'provider-onboarding' },
+      { icon: 'BarChart3', text: 'Quality Metrics', desc: 'Real-time clinical quality measure tracking', slug: 'quality-metrics' },
+      { icon: 'Lock', text: 'Data Security', desc: 'Encryption, access controls, and audit logging', slug: 'data-security' },
     ],
     useCases: [
       'Prior authorization automation',
@@ -103,12 +107,12 @@ const industriesData = {
       { value: '100%', label: 'Audit Transparency' },
     ],
     features: [
-      { icon: 'Landmark', text: 'Public Records', desc: 'Digitized records management and access' },
-      { icon: 'ShieldCheck', text: 'Security Clearance', desc: 'Role-based access for classified workflows' },
-      { icon: 'FileText', text: 'Case Management', desc: 'Constituent service case tracking and resolution' },
-      { icon: 'Users', text: 'Citizen Services', desc: 'Digital-first citizen engagement platforms' },
-      { icon: 'BarChart3', text: 'Budget Analytics', desc: 'Transparent spending and performance tracking' },
-      { icon: 'Lock', text: 'Data Sovereignty', desc: 'FedRAMP-aligned data handling and residency' },
+      { icon: 'Landmark', text: 'Public Records', desc: 'Digitized records management and access', slug: 'public-records' },
+      { icon: 'ShieldCheck', text: 'Security Clearance', desc: 'Role-based access for classified workflows', slug: 'security-clearance' },
+      { icon: 'FileText', text: 'Case Management', desc: 'Constituent service case tracking and resolution', slug: 'case-management-gov' },
+      { icon: 'Users', text: 'Citizen Services', desc: 'Digital-first citizen engagement platforms', slug: 'citizen-services' },
+      { icon: 'BarChart3', text: 'Budget Analytics', desc: 'Transparent spending and performance tracking', slug: 'budget-analytics' },
+      { icon: 'Lock', text: 'Data Sovereignty', desc: 'FedRAMP-aligned data handling and residency', slug: 'data-sovereignty' },
     ],
     useCases: [
       'Permit and licensing automation',
@@ -129,12 +133,12 @@ const industriesData = {
       { value: '100%', label: 'Regulatory Filing Accuracy' },
     ],
     features: [
-      { icon: 'Umbrella', text: 'Claims Processing', desc: 'Intelligent claims intake, triage, and resolution' },
-      { icon: 'ShieldCheck', text: 'Fraud Detection', desc: 'Pattern-based anomaly detection and flagging' },
-      { icon: 'FileText', text: 'Policy Admin', desc: 'End-to-end policy lifecycle management' },
-      { icon: 'Users', text: 'Agent Onboarding', desc: 'Streamlined producer licensing and appointments' },
-      { icon: 'BarChart3', text: 'Actuarial Analytics', desc: 'AI-enhanced risk modeling and pricing' },
-      { icon: 'Lock', text: 'Regulatory Filing', desc: 'Automated state and federal filing compliance' },
+      { icon: 'Umbrella', text: 'Claims Processing', desc: 'Intelligent claims intake, triage, and resolution', slug: 'claims-processing' },
+      { icon: 'ShieldCheck', text: 'Fraud Detection', desc: 'Pattern-based anomaly detection and flagging', slug: 'fraud-detection-ins' },
+      { icon: 'FileText', text: 'Policy Admin', desc: 'End-to-end policy lifecycle management', slug: 'policy-admin' },
+      { icon: 'Users', text: 'Agent Onboarding', desc: 'Streamlined producer licensing and appointments', slug: 'agent-onboarding' },
+      { icon: 'BarChart3', text: 'Actuarial Analytics', desc: 'AI-enhanced risk modeling and pricing', slug: 'actuarial-analytics' },
+      { icon: 'Lock', text: 'Regulatory Filing', desc: 'Automated state and federal filing compliance', slug: 'regulatory-filing' },
     ],
     useCases: [
       'Automated claims intake and triage',
@@ -155,12 +159,12 @@ const industriesData = {
       { value: '3x', label: 'Portfolio Throughput' },
     ],
     features: [
-      { icon: 'Home', text: 'Property Mgmt', desc: 'Unified property operations and tenant management' },
-      { icon: 'ShieldCheck', text: 'Lease Compliance', desc: 'Automated lease abstraction and obligation tracking' },
-      { icon: 'FileText', text: 'Doc Automation', desc: 'Intelligent document processing for real estate' },
-      { icon: 'Users', text: 'Tenant Onboarding', desc: 'Streamlined tenant application and move-in' },
-      { icon: 'BarChart3', text: 'Investment Analytics', desc: 'Portfolio performance and market analytics' },
-      { icon: 'Lock', text: 'Tokenization (Roadmap)', desc: 'Future support for tokenized property ownership and investor verification' },
+      { icon: 'Home', text: 'Property Mgmt', desc: 'Unified property operations and tenant management', slug: 'property-mgmt' },
+      { icon: 'ShieldCheck', text: 'Lease Compliance', desc: 'Automated lease abstraction and obligation tracking', slug: 'lease-compliance' },
+      { icon: 'FileText', text: 'Doc Automation', desc: 'Intelligent document processing for real estate', slug: 'doc-automation-re' },
+      { icon: 'Users', text: 'Tenant Onboarding', desc: 'Streamlined tenant application and move-in', slug: 'tenant-onboarding' },
+      { icon: 'BarChart3', text: 'Investment Analytics', desc: 'Portfolio performance and market analytics', slug: 'investment-analytics' },
+      { icon: 'Lock', text: 'Tokenization (Roadmap)', desc: 'Future support for tokenized property ownership', slug: 'tokenization-roadmap' },
     ],
     useCases: [
       'Lease abstraction and compliance',
@@ -181,12 +185,12 @@ const industriesData = {
       { value: '2x', label: 'Member Satisfaction' },
     ],
     features: [
-      { icon: 'Building2', text: 'Core Banking', desc: 'Integrated core system automation' },
-      { icon: 'ShieldCheck', text: 'BSA/AML', desc: 'Automated suspicious activity monitoring and reporting' },
-      { icon: 'FileText', text: 'Loan Docs', desc: 'End-to-end loan document processing' },
-      { icon: 'Users', text: 'Member Services', desc: 'Enhanced member experience and onboarding' },
-      { icon: 'BarChart3', text: 'Performance Reports', desc: 'Real-time financial performance dashboards' },
-      { icon: 'Lock', text: 'Cybersecurity', desc: 'Institution-grade security and threat detection' },
+      { icon: 'Building2', text: 'Core Banking', desc: 'Integrated core system automation', slug: 'core-banking' },
+      { icon: 'ShieldCheck', text: 'BSA/AML', desc: 'Automated suspicious activity monitoring and reporting', slug: 'bsa-aml' },
+      { icon: 'FileText', text: 'Loan Docs', desc: 'End-to-end loan document processing', slug: 'loan-docs' },
+      { icon: 'Users', text: 'Member Services', desc: 'Enhanced member experience and onboarding', slug: 'member-services' },
+      { icon: 'BarChart3', text: 'Performance Reports', desc: 'Real-time financial performance dashboards', slug: 'performance-reports' },
+      { icon: 'Lock', text: 'Cybersecurity', desc: 'Institution-grade security and threat detection', slug: 'cybersecurity' },
     ],
     useCases: [
       'Commercial loan origination',
@@ -207,12 +211,12 @@ const industriesData = {
       { value: '4x', label: 'Client Capacity' },
     ],
     features: [
-      { icon: 'Calculator', text: 'Tax Automation', desc: 'Automated tax preparation and e-filing' },
-      { icon: 'ShieldCheck', text: 'Audit Support', desc: 'Audit-ready documentation and workpapers' },
-      { icon: 'FileText', text: 'Doc Collection', desc: 'Intelligent document gathering and organization' },
-      { icon: 'Users', text: 'Client Portal', desc: 'Secure client collaboration and document exchange' },
-      { icon: 'BarChart3', text: 'Financial Analytics', desc: 'Practice management and client analytics' },
-      { icon: 'Lock', text: 'Data Protection', desc: 'Tax-grade security and data sovereignty' },
+      { icon: 'Calculator', text: 'Tax Automation', desc: 'Automated tax preparation and e-filing', slug: 'tax-automation' },
+      { icon: 'ShieldCheck', text: 'Audit Support', desc: 'Audit-ready documentation and workpapers', slug: 'audit-support' },
+      { icon: 'FileText', text: 'Doc Collection', desc: 'Intelligent document gathering and organization', slug: 'doc-collection' },
+      { icon: 'Users', text: 'Client Portal', desc: 'Secure client collaboration and document exchange', slug: 'client-portal' },
+      { icon: 'BarChart3', text: 'Financial Analytics', desc: 'Practice management and client analytics', slug: 'financial-analytics' },
+      { icon: 'Lock', text: 'Data Protection', desc: 'Tax-grade security and data sovereignty', slug: 'data-protection' },
     ],
     useCases: [
       'Automated tax return preparation',
@@ -476,14 +480,21 @@ export default function IndustryPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={featuresInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                  className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(10,22,40,0.07)] border border-gray-100 hover:border-gold/25 hover:shadow-[0_8px_32px_rgba(10,22,40,0.11)] transition-all duration-300 group"
                 >
-                  <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <FeatureIcon className="w-5 h-5 text-gold" strokeWidth={1.5} />
-                  </div>
-                  <h3 className="font-heading text-[0.95rem] font-bold text-navy mb-1.5 group-hover:text-gold transition-colors duration-200">{feature.text}</h3>
-                  <p className="text-[0.82rem] text-slate leading-relaxed">{feature.desc}</p>
+                  <Link
+                    to={`/industries/${slug}/${feature.slug}`}
+                    className="group block bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(10,22,40,0.07)] border border-gray-100 hover:border-gold/25 hover:shadow-[0_8px_32px_rgba(10,22,40,0.11)] transition-all duration-300 h-full"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <FeatureIcon className="w-5 h-5 text-gold" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="font-heading text-[0.95rem] font-bold text-navy mb-1.5 group-hover:text-gold transition-colors duration-200">{feature.text}</h3>
+                    <p className="text-[0.82rem] text-slate leading-relaxed mb-3">{feature.desc}</p>
+                    <span className="text-gold text-[0.68rem] font-bold tracking-[0.12em] uppercase flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                      LEARN MORE
+                      <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </Link>
                 </motion.div>
               )
             })}
