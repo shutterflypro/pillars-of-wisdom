@@ -35,16 +35,16 @@ export async function api(path, options = {}) {
 
 export const authApi = {
   login: (email, password) =>
-    api('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
+    api('/api/v1/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
 
   register: (data) =>
-    api('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
+    api('/api/v1/auth/register', { method: 'POST', body: JSON.stringify(data) }),
 
   logout: () =>
-    api('/auth/logout', { method: 'POST' }),
+    api('/api/v1/auth/logout', { method: 'POST' }),
 
   me: () =>
-    api('/auth/me'),
+    api('/api/v1/auth/me'),
 };
 
 export const customerApi = {
