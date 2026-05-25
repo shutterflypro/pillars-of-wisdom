@@ -130,6 +130,14 @@ export default function LoginPage() {
               Back to Home
             </Link>
           </div>
+
+          <div className="mt-6 bg-gold/5 border border-gold/15 rounded-lg p-4">
+            <p className="text-[0.7rem] font-semibold text-gold uppercase tracking-wider mb-2 text-center">Demo Credentials</p>
+            <div className="space-y-1 text-[0.75rem] text-slate-muted">
+              <p className="text-center"><span className="text-white/80">Admin:</span> admin@pillars.io / Admin2024!</p>
+              <p className="text-center"><span className="text-white/80">User:</span> demo@pillars.io / Demo2024!</p>
+            </div>
+          </div>
         </div>
       </motion.div>
     </div>
